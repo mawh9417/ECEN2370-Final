@@ -1,0 +1,11 @@
+../Core/Src/ApplicationCode.c:24:6:ApplicationInit	1
+../Core/Src/ApplicationCode.c:47:10:randonNum	1
+../Core/Src/ApplicationCode.c:52:6:LCD_Visual_Demo	1
+../Core/Src/ApplicationCode.c:57:6:Application_Execute_Game	1
+../Core/Src/ApplicationCode.c:63:6:LCD_Touch_Polling_Demo	2
+../Core/Src/ApplicationCode.c:80:6:LCD_Screen_Pressed	2
+../Core/Src/ApplicationCode.c:95:6:buttonInterruptInit	1
+../Core/Src/ApplicationCode.c:103:6:LCDTouchScreenInterruptGPIOInit	1
+../Core/Src/ApplicationCode.c:135:6:EXTI15_10_IRQHandler	9
+../Core/Src/ApplicationCode.c:206:6:EXTI0_IRQHandler	1
+../Core/Src/ApplicationCode.c:219:6:TIM2_IRQHandler	1

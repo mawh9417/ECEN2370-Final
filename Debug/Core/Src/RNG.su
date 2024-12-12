@@ -1,0 +1,3 @@
+../Core/Src/RNG.c:5:6:RNG_Init	16	static
+../Core/Src/RNG.c:16:6:RNG_DeInit	8	static
+../Core/Src/RNG.c:23:10:generateRandomNum	16	static
