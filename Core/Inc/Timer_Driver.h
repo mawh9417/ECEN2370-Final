@@ -50,10 +50,10 @@
 #define NO_INTERRUPT_UPDATE		0
 #define INTERRUPT_UPDATE_PEND 	1
 
-void TIM2_Init();
+void TIM6_Init();
 
-void TIM2_Start();
+void TIM6_Start();
 
-void TIM2_Stop();
+void TIM6_Stop();
 
 #endif

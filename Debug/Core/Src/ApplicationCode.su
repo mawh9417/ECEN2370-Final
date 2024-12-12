@@ -7,5 +7,4 @@
 ../Core/Src/ApplicationCode.c:95:6:buttonInterruptInit	8	static
 ../Core/Src/ApplicationCode.c:103:6:LCDTouchScreenInterruptGPIOInit	32	static
 ../Core/Src/ApplicationCode.c:135:6:EXTI15_10_IRQHandler	24	static
-../Core/Src/ApplicationCode.c:206:6:EXTI0_IRQHandler	16	static
-../Core/Src/ApplicationCode.c:219:6:TIM2_IRQHandler	8	static
+../Core/Src/ApplicationCode.c:205:6:EXTI0_IRQHandler	16	static

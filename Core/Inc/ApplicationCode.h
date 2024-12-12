@@ -28,6 +28,9 @@ void LCD_Screen_Pressed_Move();
 uint32_t randomNum();
 void buttonInterruptInit();
 
+void EXTI0_IRQHandler();
+void EXTI15_10_IRQHandler();
+
 void Application_Execute_Game();
 
 #if (COMPILE_TOUCH_FUNCTIONS == 1) && (COMPILE_TOUCH_INTERRUPT_SUPPORT == 0)

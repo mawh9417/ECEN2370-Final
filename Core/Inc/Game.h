@@ -6,6 +6,7 @@
 #include "LCD_Driver.h"
 #include "RNG.h"
 #include "Timer_Driver.h"
+#include <stdlib.h>
 
 void screenOne();
 void endGameScreen();
@@ -41,6 +42,7 @@ void removeShapeZ3(uint16_t x, uint16_t y);
 void removeShapeZ4(uint16_t x, uint16_t y);
 
 
+int countDigit(int n);
 void drawShapeL(uint16_t x, uint16_t y, uint16_t color);
 void drawShapeL2(uint16_t x, uint16_t y, uint16_t color);
 void drawShapeL3(uint16_t x, uint16_t y, uint16_t color);
@@ -84,5 +86,7 @@ bool Collision_Detect();
 void Row_Check_Delete();
 
 void executeGame();
+
+void TIM6_DAC_IRQHandler();
 
 #endif

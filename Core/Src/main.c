@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "ApplicationCode.h"
+#include <inttypes.h>
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);

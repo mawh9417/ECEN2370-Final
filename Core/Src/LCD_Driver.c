@@ -291,8 +291,8 @@ void LCD_Draw_Char(uint16_t Xpos, uint16_t Ypos, const uint16_t *c)
 //This was taken and adapted from stm32's mcu code
 void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii)
 {
-  Ascii -= 32;
-  LCD_Draw_Char(Xpos, Ypos, &LCD_Currentfonts->table[Ascii * LCD_Currentfonts->Height]);
+	  Ascii -= 32;
+	  LCD_Draw_Char(Xpos, Ypos, &LCD_Currentfonts->table[Ascii * LCD_Currentfonts->Height]);
 }
 
 void visualDemo(void)

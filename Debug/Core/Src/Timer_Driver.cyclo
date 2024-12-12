@@ -1,3 +1,3 @@
-../Core/Src/Timer_Driver.c:5:6:TIM2_Init	1
-../Core/Src/Timer_Driver.c:17:6:TIM2_Start	1
-../Core/Src/Timer_Driver.c:22:6:TIM2_Stop	1
+../Core/Src/Timer_Driver.c:5:6:TIM6_Init	1
+../Core/Src/Timer_Driver.c:16:6:TIM6_Start	1
+../Core/Src/Timer_Driver.c:21:6:TIM6_Stop	1

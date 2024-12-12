@@ -27,7 +27,7 @@ void ApplicationInit(void)
     LTCD__Init();
     LTCD_Layer_Init(0);
     RNG_Init();
-    TIM2_Init();
+    TIM6_Init();
     buttonInterruptInit();
     LCD_Clear(0,LCD_COLOR_WHITE);
     #if COMPILE_TOUCH_FUNCTIONS == 1
@@ -129,7 +129,7 @@ static uint8_t statusFlag;
 int tracker_num = 0;
 
 
-////////////// ALL INTERRUPT HANDLERS BELOW //////////////
+////////////// EXTI INTERRUPT HANDLERS BELOW //////////////
 
 
 void EXTI15_10_IRQHandler()
@@ -167,7 +167,6 @@ void EXTI15_10_IRQHandler()
 			for (int i = 312; i <= 319; i++) {
 				LCD_Draw_Horizontal_Line(0, i, 240, LCD_COLOR_BLACK);
 			}
-			TIM2_Start();
 			game_start++;
 		}
 		else if (game_start >= 1)
@@ -214,12 +213,3 @@ void EXTI0_IRQHandler()
 	HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
-int time_seconds = 0;
-
-void TIM2_IRQHandler()
-{
-	HAL_NVIC_DisableIRQ(TIM2_IRQn);
-	HAL_NVIC_ClearPendingIRQ(TIM2_IRQn);
-	time_seconds ++;
-	HAL_NVIC_EnableIRQ(TIM2_IRQn);
-}

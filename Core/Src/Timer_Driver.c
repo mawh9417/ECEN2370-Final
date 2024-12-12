@@ -1,25 +1,26 @@
 #include "Timer_Driver.h"
 
-static TIM_HandleTypeDef hrng;
+TIM_HandleTypeDef htim;
 
-void TIM2_Init()
+void TIM6_Init()
 {
-	hrng.Instance = TIM2;
-	hrng.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-	hrng.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	hrng.Init.CounterMode = TIM_COUNTERMODE_UP;
-	hrng.Init.Period = 999;
-	hrng.Init.Prescaler = 15999;
-	hrng.Init.RepetitionCounter = 0;
-	HAL_TIM_Base_Init(&hrng);
+	__HAL_RCC_TIM6_CLK_ENABLE();
+	htim.Instance = TIM6;
+	htim.Init.Prescaler = 265;
+	htim.Init.Period = 59999;
+	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+	HAL_TIM_Base_Init(&htim);
 }
 
-void TIM2_Start()
+void TIM6_Start()
 {
-	HAL_TIM_Base_Start_IT(&hrng);
+	HAL_TIM_Base_Start_IT(&htim);
 }
 
-void TIM2_Stop()
+void TIM6_Stop()
 {
-	HAL_TIM_Base_Stop_IT(&hrng);
+	HAL_TIM_Base_Stop_IT(&htim);
 }
+
+

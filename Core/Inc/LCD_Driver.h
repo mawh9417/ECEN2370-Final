@@ -60,8 +60,9 @@
 void LTCD__Init(void);
 void LTCD_Layer_Init(uint8_t LayerIndex);
 
-void LCD_DrawChar(uint16_t Xpos, uint16_t Ypos, const uint16_t *c);
+void LCD_Draw_Char(uint16_t Xpos, uint16_t Ypos, const uint16_t *c);
 void LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii);
+void LCD_DisplayChar2(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii);
 void LCD_SetTextColor(uint16_t Color);
 void LCD_SetFont(FONT_t *fonts);
 void drawSquare(uint16_t x, uint16_t y, uint16_t color);

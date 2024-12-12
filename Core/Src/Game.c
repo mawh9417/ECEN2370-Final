@@ -9,15 +9,17 @@ uint16_t y_pos = 0;
 
 // what shape is active
 int shape_is = 0;
+int time_seconds = 0;
 
 void gameDelay()
 {
-	HAL_Delay(800);
+	HAL_Delay(500);
 }
 
 // main menu
 void screenOne()
 {
+	TIM6_Start();
 	// TETRIS Press the Screen to Begin
 	LCD_Clear(0, LCD_COLOR_WHITE);
 	LCD_SetTextColor(LCD_COLOR_BLACK);
@@ -88,27 +90,57 @@ void screenOne()
 
 void endGameScreen()
 {
-	LCD_Clear(0, LCD_COLOR_WHITE);
+	LCD_Clear(0, LCD_COLOR_RED);
 	LCD_SetTextColor(LCD_COLOR_BLACK);
 	LCD_SetFont(&Font16x24);
 	LCD_DisplayChar(100,40,'G');
 	LCD_DisplayChar(115,40,'A');
 	LCD_DisplayChar(130,40,'M');
-	LCD_DisplayChar(140,40,'E');
+	LCD_DisplayChar(145,40,'E');
 
 	LCD_DisplayChar(100,60,'O');
 	LCD_DisplayChar(115,60,'V');
 	LCD_DisplayChar(125,60,'E');
-	LCD_DisplayChar(135,60,'R');
+	LCD_DisplayChar(140,60,'R');
 
+	LCD_DisplayChar(10,100,'T');
+	LCD_DisplayChar(20,100,'i');
+	LCD_DisplayChar(30,100,'m');
+	LCD_DisplayChar(40,100,'e');
+	LCD_DisplayChar(50,100,':');
 
-	LCD_DisplayChar(100,100,'T');
-	LCD_DisplayChar(110,100,'i');
-	LCD_DisplayChar(120,100,'m');
-	LCD_DisplayChar(130,100,'e');
-	LCD_DisplayChar(135,100,':');
+	int num_digits = countDigit(time_seconds);
+	char buffer[num_digits + 1];  // +1 for null terminator
+	itoa(time_seconds, buffer, 10); // Convert time_seconds to string in base 10
 
+	// Display each character of the buffer
+	int holder = 60; // Starting x-position for displaying digits
+	for (int i = 0; i <= num_digits; i++) {
+		LCD_DisplayChar(holder, 100, buffer[i] + '0');
+		holder += 10;
+	}
 }
+
+int countDigit(int n) { // count digits function from G4G
+  // Base case
+	if (n == 0)
+		return 1;
+
+	int count = 0;
+
+	// Iterate till n has digits remaining
+	while (n != 0) {
+
+		// Remove rightmost digit
+		n = n / 10;
+
+		// Increment digit count by 1
+		++count;
+	}
+	return count;
+}
+
+
 /*
  *  	BEGIN DRAW ALL SHAPES
  */
@@ -129,8 +161,6 @@ void drawWhiteSquare(uint16_t x, uint16_t y)
 }
 
 // use these to check below bottom of shape
-uint16_t y_low = 72;
-uint16_t x_where = 120;
 
 // Used to index shapes to rotate
 uint16_t index_count = 0;
@@ -1040,7 +1070,7 @@ bool row_done = false;
 void Row_Check_Delete()
 {
 	int count;
-	for (int y=12; y<320; y+=24) {
+	for (int y=12; y<308; y+=24) {
 		count = 0;
 		for (int x=12; x<240; x+=24) {
 			if (LCD_Read_Pixel(x, y) == LCD_COLOR_BLUE) {count++;}
@@ -1145,10 +1175,10 @@ bool White_Space_Below()
 		color = LCD_Read_Pixel(x_pos+10, y_pos+49);
 		break;
 	case 7:
-		color = LCD_Read_Pixel(x_pos+10, y_pos+49);
+		color = LCD_Read_Pixel(x_pos+25, y_pos+49);
 		break;
 	case 8:
-		color = LCD_Read_Pixel(x_pos+10, y_pos+73);
+		color = LCD_Read_Pixel(x_pos+25, y_pos+73);
 		break;
 	case 9:
 		color = LCD_Read_Pixel(x_pos+10, y_pos+49);
@@ -1172,7 +1202,7 @@ bool White_Space_Below()
 		color = LCD_Read_Pixel(x_pos+10, y_pos+49);
 		break;
 	case 16:
-		color = LCD_Read_Pixel(x_pos+48, y_pos+73);
+		color = LCD_Read_Pixel(x_pos+10, y_pos+73);
 		break;
 	case 17:
 		color = LCD_Read_Pixel(x_pos+10, y_pos+49);
@@ -1184,7 +1214,7 @@ bool White_Space_Below()
 		color = LCD_Read_Pixel(x_pos+10, y_pos+73);
 		break;
 	case 20:
-		color = LCD_Read_Pixel(x_pos+24, y_pos+49);
+		color = LCD_Read_Pixel(x_pos+25, y_pos+49);
 		break;
 	case 21:
 		color = LCD_Read_Pixel(x_pos+10, y_pos+73);
@@ -1214,11 +1244,18 @@ void executeGame()
 		if (row_done == true)
 		{
 			HAL_Delay(1000);
-			TIM2_Stop();
-			while(1)
-			{
-				endGameScreen();
-			}
+			TIM6_Stop();
+			endGameScreen();
+			game_started = false;
+			exit(0);
 		}
 	}
+}
+TIM_HandleTypeDef htim6;
+/////////// TIM6 IRQ HANDLER ///////////////
+void TIM6_DAC_IRQHandler()
+{
+	htim6.Instance = TIM6;
+	HAL_TIM_IRQHandler(&htim6);
+	time_seconds++;
 }
